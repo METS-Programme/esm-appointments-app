@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MPL-2.0",
   "description": "A template for creating frontend modules for UgandaEMR",
-  "browser": "dist/ugandaemr-esm-appointments-app.js",
+  "browser": "dist/esm-ugandaemr-appointments-app.js",
   "main": "src/index.ts",
   "source": true,
   "scripts": {
