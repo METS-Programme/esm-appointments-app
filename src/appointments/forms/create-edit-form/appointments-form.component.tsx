@@ -234,30 +234,6 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
           <Row className={styles.row}>
             <Column sm={1}>
               <span className={styles.columnLabel}>
-                {t("location", "Location")}
-              </span>
-            </Column>
-            <Column sm={3}>
-              <Select
-                labelText={t("selectALocation", "Select a location")}
-                id="location"
-                invalidText="Required"
-                value={selectedLocation}
-                defaultValue={selectedLocation}
-                onChange={(event) => setSelectedLocation(event.target.value)}
-              >
-                <LocationSelectOption
-                  selectedLocation={selectedLocation}
-                  defaultFacility={defaultFacility}
-                  locations={locations}
-                />
-              </Select>
-            </Column>
-          </Row>
-
-          <Row className={styles.row}>
-            <Column sm={1}>
-              <span className={styles.columnLabel}>
                 {t("service", "Service")}
               </span>
             </Column>
