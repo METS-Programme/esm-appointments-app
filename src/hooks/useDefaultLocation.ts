@@ -10,7 +10,7 @@ export const useDefaultLoginLocation = () => {
   const apiUrl = config.defaultFacilityUrl;
   const { data, error, isLoading } = useSWRImmutable<FetchResponse>(
     apiUrl,
-    openmrsFetch
+    openmrsFetch,
   );
 
   return {

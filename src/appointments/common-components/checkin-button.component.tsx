@@ -30,7 +30,7 @@ const CheckInButton: React.FC<CheckInButtonProps> = ({
           onClick={() =>
             launchOverlay(
               t("patientSearch", "Patient search"),
-              <VisitForm patientUuid={patientUuid} appointment={appointment} />
+              <VisitForm patientUuid={patientUuid} appointment={appointment} />,
             )
           }
         >

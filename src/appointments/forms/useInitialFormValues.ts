@@ -36,7 +36,7 @@ export interface PatientAppointment {
  */
 export const useInitialAppointmentFormValue = (
   appointment: MappedAppointment,
-  patientUuid: string
+  patientUuid: string,
 ): PatientAppointment => {
   const session = useSession();
   const { allowAllDayAppointments } = useConfig<ConfigObject>();

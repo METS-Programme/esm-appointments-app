@@ -20,7 +20,7 @@ export function useTodaysAppointments() {
   const results = useMemo(() => {
     const appointments =
       data?.data?.map((appointment) =>
-        mapAppointmentProperties(appointment, t)
+        mapAppointmentProperties(appointment, t),
       ) ?? [];
 
     return {
@@ -52,7 +52,7 @@ export function useServices() {
 
 export const updateAppointmentStatus = async (
   toStatus: string,
-  appointmentUuid: string
+  appointmentUuid: string,
 ) => {
   const abortController = new AbortController();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

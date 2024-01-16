@@ -33,7 +33,7 @@ const AppointmentServices: React.FC<AppointmentServicesProps> = () => {
   const locations = useLocations(appointmentLocationTagName);
   const handleSubmit = async (
     values: AppointmentService,
-    helpers: FormikHelpers<AppointmentService>
+    helpers: FormikHelpers<AppointmentService>,
   ) => {
     const payload = {
       name: values.name,
@@ -51,7 +51,7 @@ const AppointmentServices: React.FC<AppointmentServicesProps> = () => {
             kind: "success",
             description: t(
               "appointmentServiceCreate",
-              "Appointment service created successfully"
+              "Appointment service created successfully",
             ),
             title: t("appointmentService", "Appointment service"),
           });
@@ -62,13 +62,13 @@ const AppointmentServices: React.FC<AppointmentServicesProps> = () => {
         showNotification({
           title: t(
             "errorCreatingAppointmentService",
-            "Error creating appointment service"
+            "Error creating appointment service",
           ),
           kind: "error",
           critical: true,
           description: error?.message,
         });
-      }
+      },
     );
   };
   return (
@@ -93,11 +93,11 @@ const AppointmentServices: React.FC<AppointmentServicesProps> = () => {
                 invalidText={t(props.errors.name)}
                 labelText={t(
                   "appointmentServiceName",
-                  "Appointment service name"
+                  "Appointment service name",
                 )}
                 placeholder={t(
                   "appointmentServiceName",
-                  "Appointment service name"
+                  "Appointment service name",
                 )}
                 invalid={!!(props.touched && props.errors.name)}
                 onChange={props.handleChange}

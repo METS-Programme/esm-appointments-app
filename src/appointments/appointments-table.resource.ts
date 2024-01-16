@@ -18,7 +18,7 @@ export function useAppointments(status?: string, forDate?: string) {
 
   const appointments = useMemo(
     () => data?.data?.map((appointment) => getAppointment(appointment)) ?? [],
-    [data?.data]
+    [data?.data],
   );
 
   return {

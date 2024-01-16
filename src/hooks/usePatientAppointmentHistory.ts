@@ -39,7 +39,7 @@ export function usePatientAppointmentHistory(patientUuid: string) {
     : 0;
   const upcomingAppointments = data?.data?.length
     ? data.data?.filter((appointment: any) =>
-        dayjs((appointment.startDateTime / 1000) * 1000).isAfter(dayjs())
+        dayjs((appointment.startDateTime / 1000) * 1000).isAfter(dayjs()),
       ).length
     : 0;
 

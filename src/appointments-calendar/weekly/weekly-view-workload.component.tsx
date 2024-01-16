@@ -28,7 +28,7 @@ const WeeklyWorkloadView: React.FC<WeeklyCellProps> = ({
   const currentData = events?.find(
     (event) =>
       dayjs(event.appointmentDate).format("YYYY-MM-DD") ===
-      dayjs(dateTime).format("YYYY-MM-DD")
+      dayjs(dateTime).format("YYYY-MM-DD"),
   );
   const colorCoding = { HIV: "red", "Lab testing": "purple", Refill: "blue" };
   const { t } = useTranslation();
@@ -40,8 +40,8 @@ const WeeklyWorkloadView: React.FC<WeeklyCellProps> = ({
           type === "weekly"
             ? "weekly-cell"
             : isSameMonth(dateTime, currentDate)
-            ? "monthly-cell"
-            : "monthly-cell-disabled"
+              ? "monthly-cell"
+              : "monthly-cell-disabled"
         ]
       }
     >
@@ -55,7 +55,7 @@ const WeeklyWorkloadView: React.FC<WeeklyCellProps> = ({
                   <div
                     className={classNames(
                       styles.serviceArea,
-                      styles[colorCoding[serviceName]]
+                      styles[colorCoding[serviceName]],
                     )}
                     role="button"
                     tabIndex={0}
@@ -84,7 +84,7 @@ const WeeklyWorkloadView: React.FC<WeeklyCellProps> = ({
                   <span>
                     {currentData?.service.reduce(
                       (sum, currentValue) => sum + currentValue?.count ?? 0,
-                      0
+                      0,
                     )}
                   </span>
                 </div>

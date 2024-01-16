@@ -1,16 +1,16 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { openmrsFetch } from '@openmrs/esm-framework';
-import { renderWithSwr, waitForLoadingToFinish } from 'tools';
-import { mockAppointmentsData } from '__mocks__';
-import AppointmentTabs from './appointment-tabs.component';
+import React from "react";
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { openmrsFetch } from "@openmrs/esm-framework";
+import { renderWithSwr, waitForLoadingToFinish } from "tools";
+import { mockAppointmentsData } from "__mocks__";
+import AppointmentTabs from "./appointment-tabs.component";
 
 const mockOpenmrsFetch = openmrsFetch as jest.Mock;
 
 jest.setTimeout(10000);
 
-describe('AppointmentTabs', () => {
+describe("AppointmentTabs", () => {
   xit(`renders tabs showing different appointment lists`, async () => {
     const user = userEvent.setup();
 
@@ -20,13 +20,13 @@ describe('AppointmentTabs', () => {
 
     await waitForLoadingToFinish();
 
-    const scheduledAppointmentsTab = screen.getByRole('tab', {
+    const scheduledAppointmentsTab = screen.getByRole("tab", {
       name: /^scheduled$/i,
     });
-    const unsheduledAppointment = screen.getByRole('tab', {
+    const unsheduledAppointment = screen.getByRole("tab", {
       name: /^unscheduled$/i,
     });
-    const pendingAppointments = screen.getByRole('tab', {
+    const pendingAppointments = screen.getByRole("tab", {
       name: /^unscheduled$/i,
     });
 
@@ -34,16 +34,27 @@ describe('AppointmentTabs', () => {
     expect(unsheduledAppointment).toBeInTheDocument();
     expect(pendingAppointments).toBeInTheDocument();
 
-    expect(scheduledAppointmentsTab).toHaveAttribute('aria-selected', 'true');
-    expect(unsheduledAppointment).toHaveAttribute('aria-selected', 'false');
-    expect(pendingAppointments).toHaveAttribute('aria-selected', 'false');
+    expect(scheduledAppointmentsTab).toHaveAttribute("aria-selected", "true");
+    expect(unsheduledAppointment).toHaveAttribute("aria-selected", "false");
+    expect(pendingAppointments).toHaveAttribute("aria-selected", "false");
 
-    expect(screen.getByRole('button', { name: /add new appointment/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /add new appointment/i }),
+    ).toBeInTheDocument();
     expect(screen.getByText(/view calendar/i)).toBeInTheDocument();
-    expect(screen.getByRole('table')).toBeInTheDocument();
-    const expectedColumnHeaders = [/name/, /date & time/, /service type/, /provider/, /location/, /actions/];
+    expect(screen.getByRole("table")).toBeInTheDocument();
+    const expectedColumnHeaders = [
+      /name/,
+      /date & time/,
+      /service type/,
+      /provider/,
+      /location/,
+      /actions/,
+    ];
     expectedColumnHeaders.forEach((header) => {
-      expect(screen.getByRole('columnheader', { name: new RegExp(header, 'i') })).toBeInTheDocument();
+      expect(
+        screen.getByRole("columnheader", { name: new RegExp(header, "i") }),
+      ).toBeInTheDocument();
     });
 
     const expectedTableRows = [
@@ -53,7 +64,9 @@ describe('AppointmentTabs', () => {
       /Amos Strong 15-Sept-2021, 01:32 PM Outpatient TB Clinic/,
     ];
     expectedTableRows.forEach((row) => {
-      expect(screen.getByRole('row', { name: new RegExp(row, 'i') })).toBeInTheDocument();
+      expect(
+        screen.getByRole("row", { name: new RegExp(row, "i") }),
+      ).toBeInTheDocument();
     });
   });
 });

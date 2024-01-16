@@ -19,7 +19,7 @@ const AppointmentsByStatus: React.FC<AppointmentsByStatusProps> = ({
 
   const appointments = filterByServiceType(
     appointmentList,
-    appointmentServiceType
+    appointmentServiceType,
   ).map((appointment, index) => {
     return {
       id: `${index}`,

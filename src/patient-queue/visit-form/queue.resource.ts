@@ -1,4 +1,8 @@
-import { openmrsFetch, toDateObjectStrict, toOmrsIsoString } from '@openmrs/esm-framework';
+import {
+  openmrsFetch,
+  toDateObjectStrict,
+  toOmrsIsoString,
+} from "@openmrs/esm-framework";
 
 export async function saveQueueEntry(
   visitUuid: string,
@@ -12,13 +16,19 @@ export async function saveQueueEntry(
   visitQueueNumberAttributeUuid: string,
 ) {
   await Promise.all([
-    generateVisitQueueNumber(locationUuid, visitUuid, queueUuid, abortController, visitQueueNumberAttributeUuid),
+    generateVisitQueueNumber(
+      locationUuid,
+      visitUuid,
+      queueUuid,
+      abortController,
+      visitQueueNumberAttributeUuid,
+    ),
   ]);
 
   return openmrsFetch(`/ws/rest/v1/visit-queue-entry`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     signal: abortController.signal,
     body: {
@@ -53,9 +63,9 @@ export async function generateVisitQueueNumber(
   await openmrsFetch(
     `/ws/rest/v1/queue-entry-number?location=${location}&queue=${queueUuid}&visit=${visitUuid}&visitAttributeType=${visitQueueNumberAttributeUuid}`,
     {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       signal: abortController.signal,
     },

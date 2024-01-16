@@ -36,7 +36,7 @@ export function useSearchResults<T>(data: T[], searchString: string): T[] {
             return false;
           }
           return `${value}`.toLowerCase().includes(search);
-        })
+        }),
       );
     }
 
@@ -48,11 +48,11 @@ export function useSearchResults<T>(data: T[], searchString: string): T[] {
 
 export function filterByServiceType(
   appointmentList: any[],
-  appointmentServiceType: string
+  appointmentServiceType: string,
 ) {
   return appointmentServiceType
     ? appointmentList.filter(
-        ({ serviceTypeUuid }) => serviceTypeUuid === appointmentServiceType
+        ({ serviceTypeUuid }) => serviceTypeUuid === appointmentServiceType,
       )
     : appointmentList;
 }

@@ -45,14 +45,14 @@ const ScheduledAppointments: React.FC<ScheduledAppointmentsProps> = ({
   const [currentTab, setCurrentTab] = useState<string>(null);
   const [dateType, setDateType] = useState<DateType>("today");
   const scheduledAppointmentPanels = useConnectedExtensions(
-    scheduledAppointmentsPanelsSlot
+    scheduledAppointmentsPanelsSlot,
   );
   const { allowedExtensions, showExtension, hideExtension } =
     useAllowedExtensions();
   const shouldShowPanel = useCallback(
     (panel: Omit<ConnectedExtension, "config">) =>
       allowedExtensions[panel.name] ?? false,
-    [allowedExtensions]
+    [allowedExtensions],
   );
 
   useEffect(() => {
@@ -132,7 +132,7 @@ function useAllowedExtensions() {
   const [allowedExtensions, dispatch] = useReducer(
     (
       state: Record<string, boolean>,
-      action: { type: "show_extension" | "hide_extension"; extension: string }
+      action: { type: "show_extension" | "hide_extension"; extension: string },
     ) => {
       let addedState = {} as Record<string, boolean>;
       switch (action.type) {
@@ -146,7 +146,7 @@ function useAllowedExtensions() {
 
       return { ...state, ...addedState };
     },
-    {}
+    {},
   );
 
   return {
@@ -214,7 +214,7 @@ function ExtensionWrapper({
 
 function shouldDisplayExtensionTab(
   config: ConfigObject | undefined,
-  dateType: DateType
+  dateType: DateType,
 ): boolean {
   if (!config) {
     return false;

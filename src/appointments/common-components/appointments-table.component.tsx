@@ -137,10 +137,7 @@ const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
           getTableContainerProps,
         }) => (
           <TableContainer
-            title={`${startCase(tableHeading)} ${t(
-              "appointment",
-              "appointment"
-            )}`}
+            title={`${startCase(tableHeading)} ${t("appointment", "appointment")}`}
             description={`${t(`Total ${appointments.length ?? 0}`)}`}
             {...getTableContainerProps()}
           >
@@ -160,10 +157,7 @@ const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
                   onClick={() =>
                     downloadAppointmentsAsExcel(
                       appointments,
-                      `${tableHeading} Appointments ${formatDate(
-                        new Date(appointments[0]?.dateTime),
-                        { year: true }
-                      )}`
+                      `${tableHeading} Appointments ${formatDate(new Date(appointments[0]?.dateTime), { year: true })}`,
                     )
                   }
                 >

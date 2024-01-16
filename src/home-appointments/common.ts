@@ -38,7 +38,7 @@ export const handleUpdateStatus = async (
   successTitle: string,
   errorTitle: string,
   mutate,
-  t
+  t,
 ) => {
   const abortController = new AbortController();
   const { status } = await updateAppointmentStatus(toStatus, appointmentUuid);
@@ -51,7 +51,7 @@ export const handleUpdateStatus = async (
       actionButtonLabel: t("undo", "Undo"),
       progressActionLabel: t(
         "revertingAppointmentStatus",
-        "Reverting appointment status"
+        "Reverting appointment status",
       ),
       onActionButtonClick: () => handleUndoAction(appointmentUuid, mutate),
     });
@@ -69,13 +69,13 @@ export const handleUpdateStatus = async (
 export const handleComplete = (appointmentId, mutate, t) => {
   const successDescription = t(
     "appointmentMarkedAsCompleted",
-    "It has been successfully marked as Completed"
+    "It has been successfully marked as Completed",
   );
   const successTitle = t("appointmentCompleted", "Appointment Completed");
   const errorDescription = t("appointmentCompleted", "Appointment Completed");
   const errorTitle = t(
     "appointmentCompletedError",
-    "Error marking appointment as Completed"
+    "Error marking appointment as Completed",
   );
   return handleUpdateStatus(
     "Completed",
@@ -85,6 +85,6 @@ export const handleComplete = (appointmentId, mutate, t) => {
     successTitle,
     errorTitle,
     mutate,
-    t
+    t,
   );
 };

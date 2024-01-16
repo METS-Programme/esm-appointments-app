@@ -19,14 +19,14 @@ interface CalendarEvent {
 export const useAppointmentsCalendar = (forDate: string, period: string) => {
   const { startDate, endDate } = evaluateAppointmentCalendarDates(
     forDate,
-    period
+    period,
   );
   const url = `/ws/rest/v1/appointment/appointmentCalendar?startDate=${startDate}&endDate=${endDate}`;
 
   const { data, error, isLoading } = useSWR<{ data: Array<CalendarEvent> }>(
     startDate && endDate ? url : null,
     openmrsFetch,
-    { errorRetryCount: 2 }
+    { errorRetryCount: 2 },
   );
   const results =
     data?.data.map((event) => ({

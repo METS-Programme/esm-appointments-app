@@ -25,7 +25,7 @@ const BaseVisitType: React.FC<BaseVisitTypeProps> = ({
       return visitTypes.filter(
         (visitType) =>
           visitType.display.toLowerCase().search(searchTerm.toLowerCase()) !==
-          -1
+          -1,
       );
     } else {
       return visitTypes;
@@ -34,7 +34,7 @@ const BaseVisitType: React.FC<BaseVisitTypeProps> = ({
 
   const handleSearch = React.useMemo(
     () => debounce((searchTerm) => setSearchTerm(searchTerm), 300),
-    []
+    [],
   );
 
   const { results } = usePagination<{
@@ -91,7 +91,7 @@ const BaseVisitType: React.FC<BaseVisitTypeProps> = ({
           <p className={styles.emptyVisitType}>
             {t(
               "noMatchingVisitTypeFound",
-              `No visit type found matching ${searchTerm}`
+              `No visit type found matching ${searchTerm}`,
             )}
           </p>
         )}

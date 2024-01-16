@@ -32,7 +32,7 @@ const MetricsCard: React.FC<MetricsCardProps> = ({
   const { t } = useTranslation();
   const isDateInPast = useMemo(
     () => !dayjs(appointmentDate).isBefore(dayjs(), "date"),
-    [appointmentDate]
+    [appointmentDate],
   );
 
   const metricsLink = {

@@ -35,13 +35,13 @@ export const ActionsMenu = ({ appointment, useBahmniUI }: ActionMenuProps) => {
   const onMissed = () => {
     const successDescription = t(
       "appointmentMarkedAsMissed",
-      "It has been successfully marked as Missed"
+      "It has been successfully marked as Missed",
     );
     const successTitle = t("appointmentMissed", "Appointment Missed");
     const errorDescription = t("appointmentMissed", "Appointment Missed");
     const errorTitle = t(
       "appointmentMissedError",
-      "Error marking appointment as Missed"
+      "Error marking appointment as Missed",
     );
     return handleUpdateStatus(
       "Missed",
@@ -51,7 +51,7 @@ export const ActionsMenu = ({ appointment, useBahmniUI }: ActionMenuProps) => {
       successTitle,
       errorTitle,
       mutate,
-      t
+      t,
     );
   };
 
@@ -74,7 +74,7 @@ export const ActionsMenu = ({ appointment, useBahmniUI }: ActionMenuProps) => {
           navigate({ to: `${spaBasePath}` });
           launchOverlay(
             t("editAppointment", "Edit Appointment"),
-            <AppointmentForm appointment={appointment} context="editing" />
+            <AppointmentForm appointment={appointment} context="editing" />,
           );
         }}
         itemText={t("editAppointment", "Edit Appointment")}
@@ -152,7 +152,7 @@ export const ActionsMenu = ({ appointment, useBahmniUI }: ActionMenuProps) => {
             navigate({ to: `${spaBasePath}` });
             launchOverlay(
               t("cancelAppointment", "Cancel Appointment"),
-              <CancelAppointment appointment={appointment} />
+              <CancelAppointment appointment={appointment} />,
             );
           }}
           itemText={t("cancel", "Cancel")}

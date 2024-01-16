@@ -1,19 +1,19 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { openmrsFetch } from '@openmrs/esm-framework';
-import userEvent from '@testing-library/user-event';
-import AppointmentsCalendarView from './appointments-calendar-view.component';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { openmrsFetch } from "@openmrs/esm-framework";
+import userEvent from "@testing-library/user-event";
+import AppointmentsCalendarView from "./appointments-calendar-view.component";
 
 const mockedOpenmrsFetch = openmrsFetch as jest.Mock;
 
-jest.mock('../hooks/useAppointments'),
+jest.mock("../hooks/useAppointments"),
   () => ({
     useDailyAppointments: jest.fn(),
     useAppointmentsByDurationPeriod: jest.fn(),
   });
 
-describe('Appointment calendar view', () => {
-  it('renders appointments in calendar view from appointments list', async () => {
+describe("Appointment calendar view", () => {
+  it("renders appointments in calendar view from appointments list", async () => {
     const user = userEvent.setup();
 
     renderAppointmentsCalendarListView();
@@ -26,7 +26,9 @@ describe('Appointment calendar view', () => {
     ];
 
     expectedTableRows.forEach((row) => {
-      expect(screen.queryByRole('row', { name: new RegExp(row, 'i') })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole("row", { name: new RegExp(row, "i") }),
+      ).not.toBeInTheDocument();
     });
   });
 });

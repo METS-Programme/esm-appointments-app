@@ -1,5 +1,10 @@
-import { useConfig, FetchResponse, openmrsFetch, useSession } from '@openmrs/esm-framework';
-import useSWRImmutable from 'swr/immutable';
+import {
+  useConfig,
+  type FetchResponse,
+  openmrsFetch,
+  useSession,
+} from "@openmrs/esm-framework";
+import useSWRImmutable from "swr/immutable";
 
 export function useStatus() {
   const config = useConfig();
@@ -8,7 +13,10 @@ export function useStatus() {
   } = config;
 
   const apiUrl = `/ws/rest/v1/concept/${statusConceptSetUuid}`;
-  const { data, error, isLoading } = useSWRImmutable<FetchResponse>(apiUrl, openmrsFetch);
+  const { data, error, isLoading } = useSWRImmutable<FetchResponse>(
+    apiUrl,
+    openmrsFetch,
+  );
 
   return {
     statuses: data?.data?.setMembers ?? [],
@@ -33,7 +41,10 @@ export function usePriority() {
 export function useQueues(location?: string) {
   const apiUrl = `/ws/rest/v1/queue?location=${location}`;
 
-  const { data } = useSWRImmutable<{ data: { results: Array<any> } }, Error>(location ? apiUrl : null, openmrsFetch);
+  const { data } = useSWRImmutable<{ data: { results: Array<any> } }, Error>(
+    location ? apiUrl : null,
+    openmrsFetch,
+  );
 
   return {
     queues: data?.data?.results ?? [],

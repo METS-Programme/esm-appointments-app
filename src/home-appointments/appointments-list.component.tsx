@@ -186,7 +186,7 @@ const AppointmentsBaseTable = () => {
         isSortable: false,
       },
     ],
-    [t]
+    [t],
   );
 
   const tableRows = paginatedAppointments?.map((appointment) => ({
@@ -259,7 +259,7 @@ const AppointmentsBaseTable = () => {
     }: {
       sortDirection: "ASC" | "DESC" | "NONE";
       sortStates: { ASC: "ASC"; DESC: "DESC"; NONE: "NONE" };
-    }
+    },
   ) => {
     if (sortDirection === sortStates.NONE) {
       return 0;
@@ -300,7 +300,7 @@ const AppointmentsBaseTable = () => {
           <p className={styles.content}>
             {t(
               "noAppointmentsScheduledForTodayToDisplay",
-              "There are no appointments scheduled for today to display for this location"
+              "There are no appointments scheduled for today to display for this location",
             )}
             .
           </p>
@@ -371,7 +371,7 @@ const AppointmentsBaseTable = () => {
                               <TableCell
                                 className={classNames(
                                   "cds--table-column-menu",
-                                  styles.overflowMenu
+                                  styles.overflowMenu,
                                 )}
                               >
                                 <ActionsMenu
@@ -394,7 +394,7 @@ const AppointmentsBaseTable = () => {
                           <p className={styles.content}>
                             {t(
                               "noAppointmentsToDisplay",
-                              "No appointments to display"
+                              "No appointments to display",
                             )}
                           </p>
                           <p className={styles.helper}>

@@ -26,7 +26,7 @@ const CancelAppointment: React.FC<CancelAppointmentProps> = ({
   const { patient } = usePatient(appointment.patientUuid);
   const session = useSession();
   const [selectedLocation, setSelectedLocation] = useState(
-    appointment.location
+    appointment.location,
   );
   const [reason, setReason] = useState("");
   const { currentAppointmentDate } = useAppointmentDate();
@@ -47,15 +47,15 @@ const CancelAppointment: React.FC<CancelAppointmentProps> = ({
         kind: "success",
         description: t(
           "cancelledSuccessfully",
-          "It has been cancelled successfully"
+          "It has been cancelled successfully",
         ),
         title: t("appointmentCancelled", "Appointment cancelled"),
       });
       mutate(
-        `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=Scheduled`
+        `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=Scheduled`,
       );
       mutate(
-        `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=Cancelled`
+        `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=Cancelled`,
       );
       closeOverlay();
     } else {
@@ -65,7 +65,7 @@ const CancelAppointment: React.FC<CancelAppointmentProps> = ({
         critical: true,
         description: t(
           "errorCancellingAppointment",
-          "Error cancelling the appointment"
+          "Error cancelling the appointment",
         ),
       });
       setIsSubmitting(false);
