@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import useSWR from "swr";
 import { openmrsFetch } from "@openmrs/esm-framework";
-import { AppointmentService, Appointment } from "../types";
+import { type AppointmentService, type Appointment } from "../types";
 import { getAppointment, useAppointmentDate } from "../helpers";
 import isEmpty from "lodash-es/isEmpty";
 
@@ -18,7 +18,7 @@ export function useAppointments(status?: string, forDate?: string) {
 
   const appointments = useMemo(
     () => data?.data?.map((appointment) => getAppointment(appointment)) ?? [],
-    [data?.data],
+    [data?.data]
   );
 
   return {

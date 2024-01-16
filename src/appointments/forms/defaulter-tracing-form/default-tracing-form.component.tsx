@@ -22,7 +22,7 @@ const DefaulterTracingForm: React.FC<DefaulterTracingForm> = ({
       encounterUuid: "",
       closeWorkspace: closeOverlay,
     }),
-    [patientUuid, patient],
+    [patientUuid, patient]
   );
 
   return (

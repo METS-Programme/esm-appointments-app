@@ -15,7 +15,7 @@ import isEmpty from "lodash-es/isEmpty";
 export const useClinicalMetrics = () => {
   const { currentAppointmentDate } = useAppointmentDate();
   const endDate = dayjs(
-    new Date(currentAppointmentDate).setHours(23, 59, 59, 59),
+    new Date(currentAppointmentDate).setHours(23, 59, 59, 59)
   ).format(omrsDateFormat);
   const url = `/ws/rest/v1/appointment/appointmentSummary?startDate=${currentAppointmentDate}&endDate=${endDate}`;
   const { data, error, isLoading, mutate } = useSWR<{
@@ -24,17 +24,17 @@ export const useClinicalMetrics = () => {
 
   const totalAppointments = getServiceCountByAppointmentType(
     data?.data ?? [],
-    "allAppointmentsCount",
+    "allAppointmentsCount"
   );
 
   const missedAppointments = getServiceCountByAppointmentType(
     data?.data ?? [],
-    "missedAppointmentsCount",
+    "missedAppointmentsCount"
   );
 
   const transformedAppointments = flattenAppointmentSummary(data?.data ?? []);
   const highestServiceLoad = getHighestAppointmentServiceLoad(
-    transformedAppointments,
+    transformedAppointments
   );
 
   return {
@@ -58,7 +58,7 @@ export function useAllAppointmentsByDate() {
     data?.data?.filter(({ providers }) => providers !== null) ?? [];
   const providersCount = uniqBy(
     providersArray.map(({ providers }) => providers).flat(),
-    (provider) => provider.uuid,
+    (provider) => provider.uuid
   ).length;
   return {
     totalProviders: providersCount ? providersCount : 0,

@@ -86,7 +86,7 @@ const UnscheduledAppointments: React.FC = () => {
       <EmptyState
         displayText={t(
           "unscheduledAppointments_lower",
-          "unscheduled appointments",
+          "unscheduled appointments"
         )}
         headerTitle={t("unscheduledAppointments", "Unscheduled appointments")}
         scheduleType="Unscheduled"
@@ -101,7 +101,7 @@ const UnscheduledAppointments: React.FC = () => {
           <TableContainer
             title={`${t(
               "unscheduledAppointments",
-              "Unscheduled appointments",
+              "Unscheduled appointments"
             )} ${unscheduledAppointments.length}`}
             description={`${t(`Total ${unscheduledAppointments.length ?? 0}`)}`}
           >

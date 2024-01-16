@@ -21,14 +21,14 @@ export const convertTime12to24 = (time12h, timeFormat: amPm) => {
 
 const initialState = {
   appointmentDate: dayjs(new Date().setHours(0, 0, 0, 0)).format(
-    omrsDateFormat,
+    omrsDateFormat
   ),
 };
 
 export function getStartDate() {
   return getGlobalStore<{ appointmentDate: string | Date }>(
     "appointmentStartDate",
-    initialState,
+    initialState
   );
 }
 
@@ -36,19 +36,19 @@ export function changeStartDate(updatedDate: string | Date) {
   const store = getStartDate();
   store.setState({
     appointmentDate: dayjs(new Date(updatedDate).setHours(0, 0, 0, 0)).format(
-      omrsDateFormat,
+      omrsDateFormat
     ),
   });
 }
 
 export const useAppointmentDate = () => {
   const [currentAppointmentDate, setCurrentAppointmentDate] = useState(
-    initialState.appointmentDate,
+    initialState.appointmentDate
   );
 
   useEffect(() => {
     getStartDate().subscribe(({ appointmentDate }) =>
-      setCurrentAppointmentDate(appointmentDate.toString()),
+      setCurrentAppointmentDate(appointmentDate.toString())
     );
   }, []);
 

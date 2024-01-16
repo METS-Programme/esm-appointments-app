@@ -1,10 +1,10 @@
-import { AppointmentSummary, Appointment } from "../types";
+import { type AppointmentSummary, type Appointment } from "../types";
 import { formatDate, parseDate, formatDatetime } from "@openmrs/esm-framework";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 import { configSchema } from "../config-schema";
 
 export const getHighestAppointmentServiceLoad = (
-  appointmentSummary: Array<any> = [],
+  appointmentSummary: Array<any> = []
 ) => {
   const groupedAppointments = appointmentSummary?.map(
     ({ countMap, serviceName }) => ({
@@ -12,13 +12,13 @@ export const getHighestAppointmentServiceLoad = (
       count: countMap.reduce(
         (cummulator, currentValue) =>
           cummulator + currentValue.allAppointmentsCount,
-        0,
+        0
       ),
-    }),
+    })
   );
   return groupedAppointments.find(
     (summary) =>
-      summary.count === Math.max(...groupedAppointments.map((x) => x.count)),
+      summary.count === Math.max(...groupedAppointments.map((x) => x.count))
   );
 };
 
@@ -30,13 +30,13 @@ export const flattenAppointmentSummary = (appointmentToTransfrom: Array<any>) =>
 
 export const getServiceCountByAppointmentType = (
   appointmentSummary: Array<AppointmentSummary>,
-  appointmentType: string,
+  appointmentType: string
 ) => {
   return appointmentSummary
     .map((el) =>
       Object.entries(el.appointmentCountMap).flatMap(
-        (el) => el[1][appointmentType],
-      ),
+        (el) => el[1][appointmentType]
+      )
     )
     .flat(1)
     .reduce((count, val) => count + val, 0);
@@ -44,24 +44,24 @@ export const getServiceCountByAppointmentType = (
 
 function getAppointmentDuration(startTime = 0, endTime = 0) {
   const diff = endTime - startTime;
-  var minutes = Math.floor(diff / 60000);
+  let minutes = Math.floor(diff / 60000);
   return minutes + "min";
 }
 
 function formatAMPM(date) {
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var ampm = hours >= 12 ? "PM" : "AM";
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let ampm = hours >= 12 ? "PM" : "AM";
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
   minutes = minutes < 10 ? "0" + minutes : minutes;
-  var strTime = hours + ":" + minutes + " " + ampm;
+  let strTime = hours + ":" + minutes + " " + ampm;
   return strTime;
 }
 
 export const mapAppointmentProperties = (
   appointment: Appointment,
-  t?: Function,
+  t?: Function
 ) => {
   return {
     id: appointment?.uuid,
@@ -91,13 +91,13 @@ export const mapAppointmentProperties = (
     identifier: appointment?.patient?.identifiers?.find(
       (identifier) =>
         identifier.identifierName ===
-        configSchema.patientIdentifierType._default,
+        configSchema.patientIdentifierType._default
     ).identifier,
     duration: appointment.service?.durationMins
       ? appointment?.service?.durationMins + t("minutes", "min")
       : getAppointmentDuration(
           appointment.startDateTime,
-          appointment.endDateTime,
+          appointment.endDateTime
         ),
     recurring: appointment.recurring,
   };
@@ -129,7 +129,7 @@ export const getAppointment = (appointment: Appointment) => {
     identifier: appointment?.patient?.identifiers?.find(
       (identifier) =>
         identifier.identifierName ===
-        configSchema.patientIdentifierType._default,
+        configSchema.patientIdentifierType._default
     ).identifier,
   };
   return formattedAppointment;
@@ -189,7 +189,7 @@ export const weekDays = (currentDate: Dayjs) => {
       dateTime.push(
         dayjs(currentDate)
           .day(day === 0 ? 0 : day - 1)
-          .hour(hour),
+          .hour(hour)
       );
     }
   }
@@ -203,7 +203,7 @@ export const weekAllDays = (currentDate: Dayjs) => {
       dateTime.push(
         dayjs(currentDate)
           .day(day === 0 ? 0 : day - 1)
-          .hour(hour),
+          .hour(hour)
       );
     }
   }
@@ -226,7 +226,7 @@ export const dailyView = (currentDate: Dayjs) => {
       dateTime.push(
         dayjs(currentDate)
           .day(day === 0 ? 0 : day - 1)
-          .hour(hour),
+          .hour(hour)
       );
     }
   }

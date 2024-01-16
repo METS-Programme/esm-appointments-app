@@ -16,7 +16,7 @@ const MonthlyWorkload = ({ type, dateTime, currentDate, events }) => {
   const currentData = events?.find(
     (event) =>
       dayjs(event.appointmentDate)?.format("YYYY-MM-DD") ===
-      dayjs(dateTime)?.format("YYYY-MM-DD"),
+      dayjs(dateTime)?.format("YYYY-MM-DD")
   );
 
   const serviceAreaOnClick = (serviceName) => {
@@ -37,7 +37,7 @@ const MonthlyWorkload = ({ type, dateTime, currentDate, events }) => {
           [styles.greyBackground]: currentData?.service,
           [styles.smallDesktop]: layout === "small-desktop",
           [styles.largeDesktop]: layout !== "small-desktop",
-        },
+        }
       )}
     >
       {type === "monthly" && isSameMonth(dateTime, currentDate) && (
@@ -67,7 +67,7 @@ const MonthlyWorkload = ({ type, dateTime, currentDate, events }) => {
                 <span>
                   {currentData?.service.reduce(
                     (sum, { count = 0 }) => sum + count,
-                    0,
+                    0
                   )}
                 </span>
               </div>

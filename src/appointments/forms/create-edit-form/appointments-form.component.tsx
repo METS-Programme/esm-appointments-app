@@ -84,7 +84,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
   const isTablet = useLayoutType() === "tablet";
   const initialAppointmentFormValues = useInitialAppointmentFormValue(
     appointment,
-    patientUuid,
+    patientUuid
   );
   const {
     appointmentTypes,
@@ -99,24 +99,24 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedTab, setSelectedTab] = useState(0);
   const { mutate: mutateAppointmentSearch } = useAppointmentList(
-    patientAppointment.status,
+    patientAppointment.status
   );
 
   const { patient, isLoading } = usePatient(
-    patientUuid ?? patientAppointment.patientUuid,
+    patientUuid ?? patientAppointment.patientUuid
   );
   const appointmentSummary = useAppointmentSummary(
     patientAppointment.visitDate,
-    patientAppointment.serviceUuid,
+    patientAppointment.serviceUuid
   );
   const calendarWorkload = useCalendarDistribution(
     patientAppointment.serviceUuid,
     selectedTab === 0 ? "week" : "month",
-    patientAppointment.visitDate,
+    patientAppointment.visitDate
   );
 
   const appointmentService = services?.find(
-    ({ uuid }) => uuid === patientAppointment.serviceUuid,
+    ({ uuid }) => uuid === patientAppointment.serviceUuid
   );
   const today = dayjs().startOf("day").format("DD/MM/YYYY");
 
@@ -131,21 +131,21 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
   const handleSubmit = useCallback(() => {
     const [startHour, startMinutes] = convertTime12to24(
       patientAppointment.startDateTime,
-      patientAppointment.timeFormat,
+      patientAppointment.timeFormat
     );
     const [endHour, endMinutes] = convertTime12to24(
       patientAppointment.endDateTime,
-      patientAppointment.timeFormat,
+      patientAppointment.timeFormat
     );
     const startDatetime = toAppointmentDateTime(
       patientAppointment.visitDate,
       startHour,
-      startMinutes,
+      startMinutes
     );
     const endDatetime = toAppointmentDateTime(
       patientAppointment.visitDate,
       endHour,
-      endMinutes,
+      endMinutes
     );
 
     const appointmentPayload: AppointmentPayload = {
@@ -172,25 +172,25 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
             kind: "success",
             description: t(
               "appointmentNowVisible",
-              "It is now visible on the appointments page",
+              "It is now visible on the appointments page"
             ),
             title: t("appointmentScheduled", "Appointment scheduled"),
           });
           setIsSubmitting(false);
           mutate(
-            `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=Scheduled`,
+            `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=Scheduled`
           );
           mutate(
-            `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=CheckedIn`,
+            `/ws/rest/v1/appointment/appointmentStatus?forDate=${currentAppointmentDate}&status=CheckedIn`
           );
           mutate(
-            `/ws/rest/v1/appointment/all?forDate=${currentAppointmentDate}`,
+            `/ws/rest/v1/appointment/all?forDate=${currentAppointmentDate}`
           );
           mutate(
-            `/ws/rest/v1/appointment/appointmentStatus?status=Scheduled&forDate=${currentAppointmentDate}`,
+            `/ws/rest/v1/appointment/appointmentStatus?status=Scheduled&forDate=${currentAppointmentDate}`
           );
           mutate(
-            `/ws/rest/v1/appointment/appointmentStatus?status=Pending&forDate=${currentAppointmentDate}`,
+            `/ws/rest/v1/appointment/appointmentStatus?status=Pending&forDate=${currentAppointmentDate}`
           );
           mutateAppointmentSearch();
           closeOverlay();
@@ -204,7 +204,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
           description: error?.message,
         });
         setIsSubmitting(false);
-      },
+      }
     );
   }, [currentAppointmentDate, patientAppointment, t]);
 
@@ -419,8 +419,8 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
                         `${
                           appointmentService?.name
                         } clinic work load on the week of ${dayjs(
-                          first(appointmentSummary)?.date ?? new Date(),
-                        ).format("DD/MM")}`,
+                          first(appointmentSummary)?.date ?? new Date()
+                        ).format("DD/MM")}`
                       )}
                     </p>
                     <Tabs
@@ -452,7 +452,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
                                   isActive={
                                     dayjs(date).format("DD-MM-YYYY") ===
                                     dayjs(patientAppointment.visitDate).format(
-                                      "DD-MM-YYYY",
+                                      "DD-MM-YYYY"
                                     )
                                   }
                                 />
@@ -477,7 +477,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
                                   isActive={
                                     dayjs(date).format("DD-MM-YYYY") ===
                                     dayjs(patientAppointment.visitDate).format(
-                                      "DD-MM-YYYY",
+                                      "DD-MM-YYYY"
                                     )
                                   }
                                 />
@@ -505,7 +505,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
                 invalidText="Required"
                 labelText={t(
                   "selectAppointmentType",
-                  "Select an appointment type",
+                  "Select an appointment type"
                 )}
                 onChange={(event) =>
                   setPatientAppointment({
@@ -520,7 +520,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
                   <SelectItem
                     text={t(
                       "selectAppointmentType",
-                      "Select an appointment type",
+                      "Select an appointment type"
                     )}
                     value=""
                   />
@@ -629,11 +629,11 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
                   invalidText="A valid value is required"
                   labelText={t(
                     "writeAdditionalComments",
-                    "Write additional comments",
+                    "Write additional comments"
                   )}
                   placeholder={t(
                     "writeAdditionalComments",
-                    "Write any additional comments here",
+                    "Write any additional comments here"
                   )}
                   rows={4}
                   value={patientAppointment.comments}

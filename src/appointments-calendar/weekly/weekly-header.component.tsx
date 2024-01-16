@@ -45,10 +45,10 @@ function WeeklyHeader({
           {type === "monthly"
             ? currentDate.format(monthFormat)
             : type === "daily"
-              ? currentDate.format(dateFormat)
-              : `${currentDate.startOf("week").format(dateFormat)} - ${currentDate
-                  .endOf("week")
-                  .format(dateFormat)} , ${currentDate.format(yearFormat)}`}
+            ? currentDate.format(dateFormat)
+            : `${currentDate.startOf("week").format(dateFormat)} - ${currentDate
+                .endOf("week")
+                .format(dateFormat)} , ${currentDate.format(yearFormat)}`}
         </span>
         <Button
           size="sm"

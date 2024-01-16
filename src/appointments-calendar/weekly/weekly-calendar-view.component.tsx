@@ -60,8 +60,8 @@ const WeeklyCalendarView: React.FC<WeeklyCalendarViewProps> = ({
                       type === "weekly"
                         ? "weekly-cell"
                         : isSameMonth(dateTime, currentDate)
-                          ? "monthly-cell"
-                          : "monthly-cell-disabled"
+                        ? "monthly-cell"
+                        : "monthly-cell-disabled"
                     ]
                   }
                 >

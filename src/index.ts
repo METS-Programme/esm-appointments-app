@@ -29,7 +29,7 @@ export const importTranslation = require.context(
   "../translations",
   false,
   /.json$/,
-  "lazy",
+  "lazy"
 );
 
 const moduleName = "@openmrs/esm-appointments-app";
@@ -46,27 +46,27 @@ export function startupApp() {
 
   defineExtensionConfigSchema(
     "expected-appointments-panel",
-    expectedAppointmentsPanelConfigSchema,
+    expectedAppointmentsPanelConfigSchema
   );
   defineExtensionConfigSchema(
     "checked-in-appointments-panel",
-    checkedInAppointmentsPanelConfigSchema,
+    checkedInAppointmentsPanelConfigSchema
   );
   defineExtensionConfigSchema(
     "completed-appointments-panel",
-    completedAppointmentsPanelConfigSchema,
+    completedAppointmentsPanelConfigSchema
   );
   defineExtensionConfigSchema(
     "missed-appointments-panel",
-    missedAppointmentsPanelConfigSchema,
+    missedAppointmentsPanelConfigSchema
   );
   defineExtensionConfigSchema(
     "cancelled-appointments-panel",
-    cancelledAppointmentsPanelConfigSchema,
+    cancelledAppointmentsPanelConfigSchema
   );
   defineExtensionConfigSchema(
     "early-appointments-panel",
-    earlyAppointmentsPanelConfigSchema,
+    earlyAppointmentsPanelConfigSchema
   );
 
   registerBreadcrumbs([
@@ -88,35 +88,35 @@ export const root = getSyncLifecycle(rootComponent, options);
 
 export const appointmentsDashboardLink = getSyncLifecycle(
   createDashboardLink(dashboardMeta),
-  options,
+  options
 );
 
 export const appointmentsCalendarDashboardLink = getSyncLifecycle(
   createDashboardLink(appointmentCalendarDashboardMeta),
-  options,
+  options
 );
 
 export const appointmentsDashboard = getSyncLifecycle(
   appointmentsDashboardComponent,
-  options,
+  options
 );
 
 export const checkInModal = getAsyncLifecycle(
   () => import("./home-appointments/check-in-modal/check-in-modal.component"),
-  options,
+  options
 );
 
 export const homeAppointments = getSyncLifecycle(
   homeAppointmentsComponent,
-  options,
+  options
 );
 
 export const appointmentsByStatus = getSyncLifecycle(
   appointmentStatusComponent,
-  options,
+  options
 );
 
 export const earlyAppointments = getSyncLifecycle(
   earlyAppointmentsComponent,
-  options,
+  options
 );

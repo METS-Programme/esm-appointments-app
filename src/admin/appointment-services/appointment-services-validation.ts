@@ -7,7 +7,7 @@ export const validationSchema = Yup.object({
   endTime: Yup.string().required("endTimeRequired"),
   initialAppointmentStatus: Yup.string().optional(),
   location: Yup.object({ uuid: Yup.string(), display: Yup.string() }).required(
-    "locationRequired",
+    "locationRequired"
   ),
   maxAppointmentsLimit: Yup.number().required("maxAppointmentLimitRequired"),
   name: Yup.string().required("appointmentServiceNameRequired"),

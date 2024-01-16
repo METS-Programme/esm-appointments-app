@@ -3,7 +3,7 @@ import useSWR from "swr";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { openmrsFetch } from "@openmrs/esm-framework";
-import { AppointmentService, Appointment } from "../types";
+import { type AppointmentService, type Appointment } from "../types";
 import { useAppointmentDate, mapAppointmentProperties } from "../helpers";
 import { omrsDateFormat } from "../constants";
 
@@ -20,7 +20,7 @@ export function useTodaysAppointments() {
   const results = useMemo(() => {
     const appointments =
       data?.data?.map((appointment) =>
-        mapAppointmentProperties(appointment, t),
+        mapAppointmentProperties(appointment, t)
       ) ?? [];
 
     return {
@@ -52,7 +52,7 @@ export function useServices() {
 
 export const updateAppointmentStatus = async (
   toStatus: string,
-  appointmentUuid: string,
+  appointmentUuid: string
 ) => {
   const abortController = new AbortController();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

@@ -25,10 +25,10 @@ export function useUnscheduledAppointments() {
   const { data, error, isLoading } = useSWR<{ data: Array<Response> }>(
     url,
     openmrsFetch,
-    { errorRetryCount: 2 },
+    { errorRetryCount: 2 }
   );
   const appointments = data?.data?.map((appointment) =>
-    toAppointmentObject(appointment),
+    toAppointmentObject(appointment)
   );
 
   return { isLoading, data: appointments ?? [], error };
@@ -40,7 +40,7 @@ function toAppointmentObject(appointment: Response) {
     identifier: appointment?.identifiers?.find(
       (identifier) =>
         identifier.identifierName ===
-        configSchema.patientIdentifierType._default,
+        configSchema.patientIdentifierType._default
     ).identifier,
     dateTime: appointment?.visit.startDateTime,
     gender: appointment.gender,

@@ -41,12 +41,12 @@ const AppointmentsMetrics: React.FC<AppointmentMetricsProps> = ({
 
   const filteredArrivedAppointments = serviceUuid
     ? arrivedAppointments.filter(
-        ({ serviceTypeUuid }) => serviceTypeUuid === serviceUuid,
+        ({ serviceTypeUuid }) => serviceTypeUuid === serviceUuid
       )
     : arrivedAppointments;
   const filteredPendingAppointments = serviceUuid
     ? pendingAppointments.filter(
-        ({ serviceTypeUuid }) => serviceTypeUuid === serviceUuid,
+        ({ serviceTypeUuid }) => serviceTypeUuid === serviceUuid
       )
     : pendingAppointments;
 
@@ -83,7 +83,7 @@ const AppointmentsMetrics: React.FC<AppointmentMetricsProps> = ({
           headerLabel={t(
             "highestServiceVolume",
             "High volume service: {{time}}",
-            { time: formattedStartDate },
+            { time: formattedStartDate }
           )}
         />
         <MetricsCard
@@ -92,7 +92,7 @@ const AppointmentsMetrics: React.FC<AppointmentMetricsProps> = ({
           headerLabel={t(
             "providersAvailableToday",
             "Providers available: {{time}}",
-            { time: formattedStartDate },
+            { time: formattedStartDate }
           )}
         />
       </div>

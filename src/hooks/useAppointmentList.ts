@@ -29,7 +29,7 @@ interface AppointmentPatientList {
 
 export const useAppointmentList = (
   appointmentStatus: string,
-  date?: string,
+  date?: string
 ) => {
   const { currentAppointmentDate } = useAppointmentDate();
   const startDate = date ? date : currentAppointmentDate;
@@ -60,7 +60,7 @@ export const useAppointmentList = (
   });
 
   const appointments = data?.data?.map((appointment) =>
-    toAppointmentObject(appointment),
+    toAppointmentObject(appointment)
   );
   return {
     appointmentList: (appointments as Array<any>) ?? [],
@@ -81,7 +81,7 @@ export const useEarlyAppointmentList = (startDate?: string) => {
     errorRetryCount: 2,
   });
   const appointments = data?.data?.map((appointment) =>
-    toAppointmentObject(appointment),
+    toAppointmentObject(appointment)
   );
   return {
     earlyAppointmentList: (appointments as Array<any>) ?? [],
@@ -97,7 +97,7 @@ function toAppointmentObject(appointment: AppointmentPatientList) {
     identifier: appointment?.patient?.identifiers?.find(
       (identifier) =>
         identifier.identifierName ===
-        configSchema.patientIdentifierType._default,
+        configSchema.patientIdentifierType._default
     ).identifier,
     dateTime: appointment.startDateTime,
     serviceType: appointment.service?.name,

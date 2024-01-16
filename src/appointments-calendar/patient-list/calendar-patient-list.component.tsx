@@ -37,7 +37,7 @@ const CalendarPatientList: React.FC<CalendarPatientListProps> = () => {
 
   const { appointments, isLoading } = useAppointments(
     "",
-    dayjs(new Date(forDate).setHours(0, 0, 0, 0)).format(omrsDateFormat),
+    dayjs(new Date(forDate).setHours(0, 0, 0, 0)).format(omrsDateFormat)
   );
 
   const headers = [
@@ -66,7 +66,7 @@ const CalendarPatientList: React.FC<CalendarPatientListProps> = () => {
   const rowData = appointments
     ?.filter(
       ({ serviceType }) =>
-        serviceName === "Total" || serviceName === serviceType,
+        serviceName === "Total" || serviceName === serviceType
     )
     .map((appointment) => ({
       id: `${appointment.identifier}`,
@@ -122,8 +122,8 @@ const CalendarPatientList: React.FC<CalendarPatientListProps> = () => {
                           new Date(appointments[0]?.dateTime),
                           {
                             year: true,
-                          },
-                        )}`,
+                          }
+                        )}`
                       )
                     }
                   >

@@ -139,7 +139,7 @@ const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
           <TableContainer
             title={`${startCase(tableHeading)} ${t(
               "appointment",
-              "appointment",
+              "appointment"
             )}`}
             description={`${t(`Total ${appointments.length ?? 0}`)}`}
             {...getTableContainerProps()}
@@ -162,8 +162,8 @@ const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
                       appointments,
                       `${tableHeading} Appointments ${formatDate(
                         new Date(appointments[0]?.dateTime),
-                        { year: true },
-                      )}`,
+                        { year: true }
+                      )}`
                     )
                   }
                 >

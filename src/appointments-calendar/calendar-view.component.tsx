@@ -1,8 +1,8 @@
-import React from "react";
-import DailyCalendarView from "./daily/daily-calendar-view.component";
-import MonthlyCalendarView from "./monthly/monthly-calendar-view.component";
-import WeeklyCalendarView from "./weekly/weekly-calendar-view.component";
-import { type CalendarType } from "../types";
+import React from 'react';
+import DailyCalendarView from './daily/daily-calendar-view.component';
+import MonthlyCalendarView from './monthly/monthly-calendar-view.component';
+import WeeklyCalendarView from './weekly/weekly-calendar-view.component';
+import { type CalendarType } from '../types';
 
 const CalendarView: React.FC<{
   calendarView: CalendarType;
@@ -11,32 +11,17 @@ const CalendarView: React.FC<{
   setCurrentDate: any;
 }> = ({ calendarView, events, currentDate, setCurrentDate }) => {
   switch (calendarView) {
-    case "monthly":
+    case 'monthly':
       return (
-        <MonthlyCalendarView
-          type="monthly"
-          events={events}
-          currentDate={currentDate}
-          setCurrentDate={setCurrentDate}
-        />
+        <MonthlyCalendarView type="monthly" events={events} currentDate={currentDate} setCurrentDate={setCurrentDate} />
       );
-    case "weekly":
+    case 'weekly':
       return (
-        <WeeklyCalendarView
-          type="weekly"
-          events={events}
-          currentDate={currentDate}
-          setCurrentDate={setCurrentDate}
-        />
+        <WeeklyCalendarView type="weekly" events={events} currentDate={currentDate} setCurrentDate={setCurrentDate} />
       );
-    case "daily":
+    case 'daily':
       return (
-        <DailyCalendarView
-          type="daily"
-          events={events}
-          currentDate={currentDate}
-          setCurrentDate={setCurrentDate}
-        />
+        <DailyCalendarView type="daily" events={events} currentDate={currentDate} setCurrentDate={setCurrentDate} />
       );
     default:
       return null;

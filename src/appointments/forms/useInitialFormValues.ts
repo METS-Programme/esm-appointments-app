@@ -6,7 +6,7 @@ import {
 import dayjs from "dayjs";
 import { type amPm } from "../../helpers";
 import { type MappedAppointment } from "../../types";
-import { ConfigObject } from "../../config-schema";
+import { type ConfigObject } from "../../config-schema";
 
 export interface PatientAppointment {
   appointmentKind: string;
@@ -36,7 +36,7 @@ export interface PatientAppointment {
  */
 export const useInitialAppointmentFormValue = (
   appointment: MappedAppointment,
-  patientUuid: string,
+  patientUuid: string
 ): PatientAppointment => {
   const session = useSession();
   const { allowAllDayAppointments } = useConfig<ConfigObject>();

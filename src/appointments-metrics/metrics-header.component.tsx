@@ -18,7 +18,7 @@ const MetricsHeader: React.FC = () => {
     closeOverlay();
     launchOverlay(
       t("appointmentForm", "Create Appointment"),
-      <AppointmentForm patientUuid={patientUuid} context="creating" />,
+      <AppointmentForm patientUuid={patientUuid} context="creating" />
     );
   };
 

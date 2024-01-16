@@ -22,7 +22,7 @@ const EarlyAppointments: React.FC<EarlyAppointmentsProps> = ({
 
   const appointments = filterByServiceType(
     earlyAppointmentList,
-    appointmentServiceType,
+    appointmentServiceType
   ).map((appointment, index) => {
     return {
       id: `${index}`,

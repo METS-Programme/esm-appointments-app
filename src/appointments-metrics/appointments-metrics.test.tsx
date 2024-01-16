@@ -1,17 +1,13 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { openmrsFetch } from "@openmrs/esm-framework";
-import {
-  mockAppointmentMetrics,
-  mockProvidersCount,
-  mockStartTime,
-} from "__mocks__";
-import AppointmentsMetrics from "./appointments-metrics.component";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { openmrsFetch } from '@openmrs/esm-framework';
+import { mockAppointmentMetrics, mockProvidersCount, mockStartTime } from '__mocks__';
+import AppointmentsMetrics from './appointments-metrics.component';
 
 const mockedOpenmrsFetch = openmrsFetch as jest.Mock;
 
-jest.mock("../hooks/useClinicalMetrics", () => {
-  const originalModule = jest.requireActual("../hooks/useClinicalMetrics");
+jest.mock('../hooks/useClinicalMetrics', () => {
+  const originalModule = jest.requireActual('../hooks/useClinicalMetrics');
 
   return {
     ...originalModule,
@@ -34,8 +30,8 @@ jest.mock("../hooks/useClinicalMetrics", () => {
   };
 });
 
-describe("Appointment metrics", () => {
-  it("renders metrics from the appointments list", async () => {
+describe('Appointment metrics', () => {
+  it('renders metrics from the appointments list', async () => {
     mockedOpenmrsFetch.mockResolvedValue({ data: [] });
 
     renderAppointmentMetrics();

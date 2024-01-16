@@ -12,7 +12,7 @@ export const useVisits = () => {
   const session = useSession();
 
   const visitsUrl = `/ws/rest/v1/visit?includeInactive=true&v=custom:(uuid,patient:(uuid,identifiers:(identifier,uuid),person:(age,display,gender,uuid)),visitType:(uuid,name,display),location:(uuid,name,display),startDatetime,stopDatetime)&fromStartDate=${dayjs(
-    currentAppointmentDate,
+    currentAppointmentDate
   ).format("YYYY-MM-DD")}&location=${session?.sessionLocation?.uuid}`;
 
   const { data, error, isLoading, mutate } = useSWR<{

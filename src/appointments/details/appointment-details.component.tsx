@@ -15,7 +15,7 @@ const AppointmentDetails: React.FC<AppointmentDetailsProps> = ({
 }) => {
   const { t } = useTranslation();
   const { appointmentsCount } = usePatientAppointmentHistory(
-    appointment.patientUuid,
+    appointment.patientUuid
   );
 
   return (

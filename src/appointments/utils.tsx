@@ -10,10 +10,7 @@ import { MappedAppointment } from "../types";
  * @param {number} [pageSize=10] The page size.
  * @returns {Array<number>} An array of page sizes.
  */
-export function getPageSizes<T>(
-  data: Array<T>,
-  pageSize: number = 10,
-): Array<number> {
+export function getPageSizes<T>(data: Array<T>, pageSize = 10): Array<number> {
   if (!data) {
     return [];
   }
@@ -39,7 +36,7 @@ export function useSearchResults<T>(data: T[], searchString: string): T[] {
             return false;
           }
           return `${value}`.toLowerCase().includes(search);
-        }),
+        })
       );
     }
 
@@ -51,11 +48,11 @@ export function useSearchResults<T>(data: T[], searchString: string): T[] {
 
 export function filterByServiceType(
   appointmentList: any[],
-  appointmentServiceType: string,
+  appointmentServiceType: string
 ) {
   return appointmentServiceType
     ? appointmentList.filter(
-        ({ serviceTypeUuid }) => serviceTypeUuid === appointmentServiceType,
+        ({ serviceTypeUuid }) => serviceTypeUuid === appointmentServiceType
       )
     : appointmentList;
 }

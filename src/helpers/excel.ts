@@ -13,8 +13,8 @@ export function downloadAppointmentsAsExcel(
     {
       year: true,
       time: true,
-    },
-  )}`,
+    }
+  )}`
 ) {
   const appointmentsJSON = appointments?.map(
     ({
@@ -33,7 +33,7 @@ export function downloadAppointmentsAsExcel(
       "Appointment type": serviceType,
       Date: formatDate(new Date(dateTime), { mode: "wide" }),
       "Phone Number": phoneNumber || "--",
-    }),
+    })
   );
 
   const worksheet = createWorksheet(appointmentsJSON);
@@ -51,7 +51,7 @@ export function downloadUnscheduledAppointments(
   fileName = `Unscheduled appointments ${formatDate(new Date(), {
     year: true,
     time: true,
-  })}`,
+  })}`
 ) {
   const appointmentsJSON = unscheduledAppointments?.map((appointment) => ({
     "Patient name": appointment.name,
@@ -72,7 +72,7 @@ export function downloadUnscheduledAppointments(
 function createWorksheet(data: any[]) {
   const max_width = data.reduce(
     (w, r) => Math.max(w, r["Patient name"].length),
-    30,
+    30
   );
   const worksheet = XLSX.utils.json_to_sheet(data);
   worksheet["!cols"] = [{ wch: max_width }];

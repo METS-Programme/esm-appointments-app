@@ -15,7 +15,7 @@ const AppointmentsCalendarView: React.FC = () => {
     useAppointmentDate();
   const { calendarEvents } = useAppointmentsCalendar(
     dayjs(currentAppointmentDate).toISOString(),
-    calendarView,
+    calendarView
   );
 
   return (

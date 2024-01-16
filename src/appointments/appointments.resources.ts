@@ -1,8 +1,8 @@
 import useSWR from "swr";
 import { openmrsFetch } from "@openmrs/esm-framework";
 import {
-  AppointmentService,
-  AppointmentsFetchResponse,
+  type AppointmentService,
+  type AppointmentsFetchResponse,
   Provider,
 } from "../types";
 

@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import dayjs from "dayjs";
-import { first } from "rxjs/operators";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import dayjs from 'dayjs';
+import { first } from 'rxjs/operators';
 import {
   Button,
   ButtonSet,
@@ -18,8 +18,8 @@ import {
   TimePicker,
   TimePickerSelect,
   SkeletonText,
-} from "@carbon/react";
-import { useTranslation } from "react-i18next";
+} from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 import {
   useSession,
   ExtensionSlot,
@@ -34,22 +34,18 @@ import {
   usePatient,
   useConfig,
   useLocations,
-} from "@openmrs/esm-framework";
-import isEmpty from "lodash-es/isEmpty";
-import BaseVisitType from "./base-visit-type.component";
-import {
-  type amPm,
-  convertTime12to24,
-  useAppointmentDate,
-} from "../../helpers";
-import { closeOverlay } from "../../hooks/useOverlay";
-import { saveQueueEntry } from "./queue.resource";
-import { type MappedAppointment } from "../../types";
-import { useAppointments } from "../../appointments/appointments-table.resource";
-import { useDefaultLoginLocation } from "../../hooks/useDefaultLocation";
-import { useVisits } from "../../hooks/useVisits";
-import styles from "./visit-form.scss";
-import { appointmentLocationTagName } from "../../constants";
+} from '@openmrs/esm-framework';
+import isEmpty from 'lodash-es/isEmpty';
+import BaseVisitType from './base-visit-type.component';
+import { type amPm, convertTime12to24, useAppointmentDate } from '../../helpers';
+import { closeOverlay } from '../../hooks/useOverlay';
+import { saveQueueEntry } from './queue.resource';
+import { type MappedAppointment } from '../../types';
+import { useAppointments } from '../../appointments/appointments-table.resource';
+import { useDefaultLoginLocation } from '../../hooks/useDefaultLocation';
+import { useVisits } from '../../hooks/useVisits';
+import styles from './visit-form.scss';
+import { appointmentLocationTagName } from '../../constants';
 
 interface VisitFormProps {
   patientUuid: string;
@@ -59,19 +55,15 @@ interface VisitFormProps {
 const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
   const { t } = useTranslation();
   const { currentAppointmentDate } = useAppointmentDate();
-  const isTablet = useLayoutType() === "tablet";
+  const isTablet = useLayoutType() === 'tablet';
   const sessionUser = useSession();
   const locations = useLocations(appointmentLocationTagName);
   const [isMissingVisitType, setIsMissingVisitType] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState(
-    sessionUser?.sessionLocation?.uuid ?? "",
-  );
-  const [timeFormat, setTimeFormat] = useState<amPm>(
-    new Date().getHours() >= 12 ? "PM" : "AM",
-  );
+  const [selectedLocation, setSelectedLocation] = useState(sessionUser?.sessionLocation?.uuid ?? '');
+  const [timeFormat, setTimeFormat] = useState<amPm>(new Date().getHours() >= 12 ? 'PM' : 'AM');
   const [visitDate, setVisitDate] = useState(new Date());
-  const [visitTime, setVisitTime] = useState(dayjs(new Date()).format("hh:mm"));
+  const [visitTime, setVisitTime] = useState(dayjs(new Date()).format('hh:mm'));
   const [visitType, setVisitType] = useState<string | null>(null);
   const state = useMemo(() => ({ patientUuid }), [patientUuid]);
   const allVisitTypes = useVisitTypes();
@@ -79,10 +71,8 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
   const { mutateVisit } = useVisits();
   const { isLoading, patient } = usePatient(patientUuid);
   const config = useConfig();
-  const visitQueueNumberAttributeUuid =
-    config.concepts.visitQueueNumberAttributeUuid;
-  const { defaultFacility, isLoading: loadingDefaultFacility } =
-    useDefaultLoginLocation();
+  const visitQueueNumberAttributeUuid = config.concepts.visitQueueNumberAttributeUuid;
+  const { defaultFacility, isLoading: loadingDefaultFacility } = useDefaultLoginLocation();
 
   useEffect(() => {
     if (locations?.length && sessionUser) {
@@ -129,11 +119,11 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
               if (config.showServiceQueueFields) {
                 // retrieve values from queue extension
 
-                const queueLocation = event?.target["queueLocation"]?.value;
-                const serviceUuid = event?.target["service"]?.value;
-                const priority = event?.target["priority"]?.value;
-                const status = event?.target["status"]?.value;
-                const sortWeight = event?.target["sortWeight"]?.value;
+                const queueLocation = event?.target['queueLocation']?.value;
+                const serviceUuid = event?.target['service']?.value;
+                const priority = event?.target['priority']?.value;
+                const status = event?.target['status']?.value;
+                const sortWeight = event?.target['sortWeight']?.value;
                 saveQueueEntry(
                   response.data.uuid,
                   serviceUuid,
@@ -149,10 +139,10 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
                     if (status === 201) {
                       mutate();
                       showToast({
-                        kind: "success",
-                        title: t("visitStarted", "Visit started"),
+                        kind: 'success',
+                        title: t('visitStarted', 'Visit started'),
                         description: t(
-                          "queueAddedSuccessfully",
+                          'queueAddedSuccessfully',
                           `Patient has been added to the queue successfully.`,
                           `${hours} : ${minutes}`,
                         ),
@@ -161,11 +151,8 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
                   },
                   (error) => {
                     showNotification({
-                      title: t(
-                        "queueEntryError",
-                        "Error adding patient to the queue",
-                      ),
-                      kind: "error",
+                      title: t('queueEntryError', 'Error adding patient to the queue'),
+                      kind: 'error',
                       critical: true,
                       description: error?.message,
                     });
@@ -179,25 +166,15 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
           },
           (error) => {
             showNotification({
-              title: t("startVisitError", "Error starting visit"),
-              kind: "error",
+              title: t('startVisitError', 'Error starting visit'),
+              kind: 'error',
               critical: true,
               description: error?.message,
             });
           },
         );
     },
-    [
-      visitType,
-      visitTime,
-      timeFormat,
-      patientUuid,
-      visitDate,
-      selectedLocation,
-      t,
-      mutate,
-      currentAppointmentDate,
-    ],
+    [visitType, visitTime, timeFormat, patientUuid, visitDate, selectedLocation, t, mutate, currentAppointmentDate],
   );
 
   return (
@@ -205,11 +182,7 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
       <div>
         {isTablet ? (
           <Row className={styles.headerGridRow}>
-            <ExtensionSlot
-              name="visit-form-header-slot"
-              className={styles.dataGridRow}
-              state={state}
-            />
+            <ExtensionSlot name="visit-form-header-slot" className={styles.dataGridRow} state={state} />
           </Row>
         ) : isLoading ? (
           <SkeletonText />
@@ -224,9 +197,7 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
         )}
         <Stack gap={8} className={styles.container}>
           <section className={styles.section}>
-            <div className={styles.sectionTitle}>
-              {t("dateAndTimeOfVisit", "Date and time of visit")}
-            </div>
+            <div className={styles.sectionTitle}>{t('dateAndTimeOfVisit', 'Date and time of visit')}</div>
             <div className={styles.dateTimeSection}>
               {isTablet ? (
                 <Layer>
@@ -234,16 +205,15 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
                     dateFormat="d/m/Y"
                     datePickerType="single"
                     id="visitDate"
-                    style={{ paddingBottom: "1rem" }}
+                    style={{ paddingBottom: '1rem' }}
                     maxDate={new Date().toISOString()}
                     onChange={([date]) => setVisitDate(date)}
-                    value={visitDate}
-                  >
+                    value={visitDate}>
                     <DatePickerInput
                       id="visitStartDateInput"
-                      labelText={t("date", "Date")}
+                      labelText={t('date', 'Date')}
                       placeholder="dd/mm/yyyy"
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                     />
                   </DatePicker>
                 </Layer>
@@ -252,16 +222,15 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
                   dateFormat="d/m/Y"
                   datePickerType="single"
                   id="visitDate"
-                  style={{ paddingBottom: "1rem" }}
+                  style={{ paddingBottom: '1rem' }}
                   maxDate={new Date().toISOString()}
                   onChange={([date]) => setVisitDate(date)}
-                  value={visitDate}
-                >
+                  value={visitDate}>
                   <DatePickerInput
                     id="visitStartDateInput"
-                    labelText={t("date", "Date")}
+                    labelText={t('date', 'Date')}
                     placeholder="dd/mm/yyyy"
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                   />
                 </DatePicker>
               )}
@@ -269,23 +238,17 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
                 <Layer>
                   <TimePicker
                     id="visitStartTime"
-                    labelText={t("time", "Time")}
-                    onChange={(event) =>
-                      setVisitTime(event.target.value as amPm)
-                    }
+                    labelText={t('time', 'Time')}
+                    onChange={(event) => setVisitTime(event.target.value as amPm)}
                     pattern="^(1[0-2]|0?[1-9]):([0-5]?[0-9])$"
-                    style={{ marginLeft: "0.125rem", flex: "none" }}
-                    value={visitTime}
-                  >
+                    style={{ marginLeft: '0.125rem', flex: 'none' }}
+                    value={visitTime}>
                     <TimePickerSelect
                       id="visitStartTimeSelect"
-                      onChange={(event) =>
-                        setTimeFormat(event.target.value as amPm)
-                      }
+                      onChange={(event) => setTimeFormat(event.target.value as amPm)}
                       value={timeFormat}
-                      labelText={t("time", "Time")}
-                      aria-label={t("time", "Time")}
-                    >
+                      labelText={t('time', 'Time')}
+                      aria-label={t('time', 'Time')}>
                       <SelectItem value="AM" text="AM" />
                       <SelectItem value="PM" text="PM" />
                     </TimePickerSelect>
@@ -294,21 +257,17 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
               ) : (
                 <TimePicker
                   id="visitStartTime"
-                  labelText={t("time", "Time")}
+                  labelText={t('time', 'Time')}
                   onChange={(event) => setVisitTime(event.target.value as amPm)}
                   pattern="^(1[0-2]|0?[1-9]):([0-5]?[0-9])$"
-                  style={{ marginLeft: "0.125rem", flex: "none" }}
-                  value={visitTime}
-                >
+                  style={{ marginLeft: '0.125rem', flex: 'none' }}
+                  value={visitTime}>
                   <TimePickerSelect
                     id="visitStartTimeSelect"
-                    onChange={(event) =>
-                      setTimeFormat(event.target.value as amPm)
-                    }
+                    onChange={(event) => setTimeFormat(event.target.value as amPm)}
                     value={timeFormat}
-                    labelText={t("time", "Time")}
-                    aria-label={t("time", "Time")}
-                  >
+                    labelText={t('time', 'Time')}
+                    aria-label={t('time', 'Time')}>
                     <SelectItem value="AM" text="AM" />
                     <SelectItem value="PM" text="PM" />
                   </TimePickerSelect>
@@ -318,40 +277,27 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
           </section>
 
           <section className={styles.section}>
-            <div className={styles.sectionTitle}>
-              {t("visitLocation", "Visit Location")}
-            </div>
+            <div className={styles.sectionTitle}>{t('visitLocation', 'Visit Location')}</div>
             {isTablet ? (
               <Layer>
                 <Select
-                  labelText={t("selectFacility", "Select a facility")}
+                  labelText={t('selectFacility', 'Select a facility')}
                   id="location"
                   invalidText="Required"
                   value={selectedLocation}
                   defaultSelected={selectedLocation}
-                  onChange={(event) => setSelectedLocation(event.target.value)}
-                >
-                  {!selectedLocation ? (
-                    <SelectItem
-                      text={t("selectOption", "Select an option")}
-                      value=""
-                    />
-                  ) : null}
+                  onChange={(event) => setSelectedLocation(event.target.value)}>
+                  {!selectedLocation ? <SelectItem text={t('selectOption', 'Select an option')} value="" /> : null}
                   {!isEmpty(defaultFacility) ? (
                     <SelectItem
                       key={defaultFacility?.uuid}
                       text={defaultFacility?.display}
-                      value={defaultFacility?.uuid}
-                    >
+                      value={defaultFacility?.uuid}>
                       {defaultFacility?.display}
                     </SelectItem>
                   ) : locations?.length > 0 ? (
                     locations.map((location) => (
-                      <SelectItem
-                        key={location.uuid}
-                        text={location.display}
-                        value={location.uuid}
-                      >
+                      <SelectItem key={location.uuid} text={location.display} value={location.uuid}>
                         {location.display}
                       </SelectItem>
                     ))
@@ -360,34 +306,20 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
               </Layer>
             ) : (
               <Select
-                labelText={t("selectFacility", "Select a facility")}
+                labelText={t('selectFacility', 'Select a facility')}
                 id="location"
                 invalidText="Required"
                 value={selectedLocation}
                 defaultSelected={selectedLocation}
-                onChange={(event) => setSelectedLocation(event.target.value)}
-              >
-                {!selectedLocation ? (
-                  <SelectItem
-                    text={t("selectOption", "Select an option")}
-                    value=""
-                  />
-                ) : null}
+                onChange={(event) => setSelectedLocation(event.target.value)}>
+                {!selectedLocation ? <SelectItem text={t('selectOption', 'Select an option')} value="" /> : null}
                 {!isEmpty(defaultFacility) ? (
-                  <SelectItem
-                    key={defaultFacility?.uuid}
-                    text={defaultFacility?.display}
-                    value={defaultFacility?.uuid}
-                  >
+                  <SelectItem key={defaultFacility?.uuid} text={defaultFacility?.display} value={defaultFacility?.uuid}>
                     {defaultFacility?.display}
                   </SelectItem>
                 ) : locations?.length > 0 ? (
                   locations.map((location) => (
-                    <SelectItem
-                      key={location.uuid}
-                      text={location.display}
-                      value={location.uuid}
-                    >
+                    <SelectItem key={location.uuid} text={location.display} value={location.uuid}>
                       {location.display}
                     </SelectItem>
                   ))
@@ -396,11 +328,9 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
             )}
           </section>
           <section>
-            <div className={styles.sectionTitle}>
-              {t("visitType", "Visit Type")}
-            </div>
+            <div className={styles.sectionTitle}>{t('visitType', 'Visit Type')}</div>
             <ContentSwitcher className={styles.contentSwitcher}>
-              <Switch name="all" text={t("all", "All")} />
+              <Switch name="all" text={t('all', 'All')} />
             </ContentSwitcher>
             <BaseVisitType
               onChange={(visitType) => {
@@ -414,36 +344,25 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
           {isMissingVisitType && (
             <section>
               <InlineNotification
-                style={{ margin: "0", minWidth: "100%" }}
+                style={{ margin: '0', minWidth: '100%' }}
                 kind="error"
                 lowContrast={true}
-                title={t("missingVisitType", "Missing visit type")}
-                subtitle={t("selectVisitType", "Please select a Visit Type")}
+                title={t('missingVisitType', 'Missing visit type')}
+                subtitle={t('selectVisitType', 'Please select a Visit Type')}
               />
             </section>
           )}
 
           {/* Queue location and queue fields. These get shown when queue location and queue fields are configured */}
-          {config.showServiceQueueFields && (
-            <ExtensionSlot name="add-queue-entry-slot" />
-          )}
+          {config.showServiceQueueFields && <ExtensionSlot name="add-queue-entry-slot" />}
         </Stack>
       </div>
       <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
-        <Button
-          className={styles.button}
-          kind="secondary"
-          onClick={closeOverlay}
-        >
-          {t("discard", "Discard")}
+        <Button className={styles.button} kind="secondary" onClick={closeOverlay}>
+          {t('discard', 'Discard')}
         </Button>
-        <Button
-          className={styles.button}
-          disabled={isSubmitting}
-          kind="primary"
-          type="submit"
-        >
-          {t("addPatientToQueue", "Add patient to queue")}
+        <Button className={styles.button} disabled={isSubmitting} kind="primary" type="submit">
+          {t('addPatientToQueue', 'Add patient to queue')}
         </Button>
       </ButtonSet>
     </Form>

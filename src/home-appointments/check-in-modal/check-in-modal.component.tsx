@@ -30,7 +30,7 @@ const CheckInAppointmentModal: React.FC<ChangeStatusDialogProps> = ({
   const { t } = useTranslation();
   const { mutate } = useSWRConfig();
   const [checkInTime, setCheckInTime] = useState(
-    dayjs(new Date()).format("hh:mm"),
+    dayjs(new Date()).format("hh:mm")
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,7 +38,7 @@ const CheckInAppointmentModal: React.FC<ChangeStatusDialogProps> = ({
     setIsSubmitting(true);
     const { status } = await updateAppointmentStatus(
       "CheckedIn",
-      appointmentUuid,
+      appointmentUuid
     );
     if (status === 200) {
       closeCheckInModal();
@@ -48,12 +48,12 @@ const CheckInAppointmentModal: React.FC<ChangeStatusDialogProps> = ({
         actionButtonLabel: t("undo", "Undo"),
         progressActionLabel: t(
           "revertingAppointmentStatus",
-          "Reverting appointment status",
+          "Reverting appointment status"
         ),
         onActionButtonClick: () => handleUndoAction(appointmentUuid, mutate),
         subtitle: t(
           "appointmentSuccessfullyCheckedIn",
-          "It has been checked-in successfully",
+          "It has been checked-in successfully"
         ),
         title: t("appointmentCheckedIn", "Appointment Checked-in"),
       });
@@ -65,7 +65,7 @@ const CheckInAppointmentModal: React.FC<ChangeStatusDialogProps> = ({
         critical: true,
         description: t(
           "errorCheckingAppoitment",
-          "Error checking in the appointment",
+          "Error checking in the appointment"
         ),
       });
       setIsSubmitting(false);
@@ -78,7 +78,7 @@ const CheckInAppointmentModal: React.FC<ChangeStatusDialogProps> = ({
         closeModal={closeCheckInModal}
         title={t(
           "checkInAppointment",
-          "Are you sure you want to mark appointment as Checked-in?",
+          "Are you sure you want to mark appointment as Checked-in?"
         )}
       />
       <ModalBody>

@@ -35,13 +35,13 @@ const AppointmentActions: React.FC<AppointmentActionsProps> = ({
   const isFutureAppointment = visitDate.isAfter(dayjs());
   const isTodayAppointment = visitDate.isToday();
   const hasActiveVisit = visits?.some(
-    (visit) => visit?.patient?.uuid === patientUuid && visit?.startDatetime,
+    (visit) => visit?.patient?.uuid === patientUuid && visit?.startDatetime
   );
   const hasCheckedOut = visits?.some(
     (visit) =>
       visit?.patient?.uuid === patientUuid &&
       visit?.startDatetime &&
-      visit?.stopDatetime,
+      visit?.stopDatetime
   );
 
   const handleCheckout = () => {
@@ -57,7 +57,7 @@ const AppointmentActions: React.FC<AppointmentActionsProps> = ({
   const handleOpenDefaulterForm = () => {
     launchOverlay(
       "CCC Defaulter tracing form",
-      <DefaulterTracingForm patientUuid={appointment.patientUuid} />,
+      <DefaulterTracingForm patientUuid={appointment.patientUuid} />
     );
   };
 
@@ -126,7 +126,7 @@ const AppointmentActions: React.FC<AppointmentActionsProps> = ({
             onClick={() =>
               launchOverlay(
                 t("editAppointments", "Edit Appointment"),
-                <AppointmentForm appointment={appointment} context="editing" />,
+                <AppointmentForm appointment={appointment} context="editing" />
               )
             }
           />
