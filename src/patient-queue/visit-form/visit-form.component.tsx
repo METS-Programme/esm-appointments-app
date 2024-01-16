@@ -61,7 +61,7 @@ const VisitForm: React.FC<VisitFormProps> = ({ patientUuid, appointment }) => {
   const { currentAppointmentDate } = useAppointmentDate();
   const isTablet = useLayoutType() === "tablet";
   const sessionUser = useSession();
-  const locations = useLocations(appointmentLocationTagName);
+  const locations = useLocations();
   const [isMissingVisitType, setIsMissingVisitType] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(

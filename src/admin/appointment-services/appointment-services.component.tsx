@@ -30,7 +30,7 @@ const AppointmentServices: React.FC<AppointmentServicesProps> = () => {
   const { appointmentServiceInitialValue, addNewAppointmentService } =
     useAppointmentServices();
 
-  const locations = useLocations(appointmentLocationTagName);
+  const locations = useLocations();
   const handleSubmit = async (
     values: AppointmentService,
     helpers: FormikHelpers<AppointmentService>,

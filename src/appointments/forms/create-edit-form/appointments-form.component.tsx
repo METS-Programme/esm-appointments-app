@@ -79,7 +79,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
     useDefaultLoginLocation();
   const { providers } = useProviders();
   const { services } = useServices();
-  const locations = useLocations(appointmentLocationTagName);
+  const locations = useLocations();
   const sessionUser = useSession();
   const isTablet = useLayoutType() === "tablet";
   const initialAppointmentFormValues = useInitialAppointmentFormValue(
