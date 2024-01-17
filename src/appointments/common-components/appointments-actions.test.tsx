@@ -14,7 +14,9 @@ describe("AppointmentActions", () => {
   };
 
   beforeAll(() => {
-    // jest.useFakeTimers("modern");
+    jest.useFakeTimers({
+      legacyFakeTimers: true,
+    });
     const currentDateTime = new Date();
     currentDateTime.setHours(12);
     currentDateTime.setMinutes(0);

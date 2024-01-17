@@ -22,7 +22,7 @@ const swrWrapper = ({ children }) => {
 
 const renderWithSwr = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, "queries">
+  options?: Omit<RenderOptions, "queries">,
 ) => render(ui, { wrapper: swrWrapper, ...options });
 
 function waitForLoadingToFinish() {
@@ -30,7 +30,7 @@ function waitForLoadingToFinish() {
     () => [...screen.queryAllByRole("progressbar")],
     {
       timeout: 4000,
-    }
+    },
   );
 }
 
@@ -41,7 +41,7 @@ function getByTextWithMarkup(text: RegExp | string) {
       const hasText = (node: Element) =>
         node.textContent === text || node.textContent.match(text);
       const childrenDontHaveText = Array.from(node.children).every(
-        (child) => !hasText(child as HTMLElement)
+        (child) => !hasText(child as HTMLElement),
       );
       return hasText(node) && childrenDontHaveText;
     });

@@ -1,12 +1,14 @@
-const React = require('react');
-const reactI18next = require('react-i18next');
+const React = require("react");
+const reactI18next = require("react-i18next");
 
-const hasChildren = (node) => node && (node.children || (node.props && node.props.children));
+const hasChildren = (node) =>
+  node && (node.children || (node.props && node.props.children));
 
-const getChildren = (node) => (node && node.children ? node.children : node.props && node.props.children);
+const getChildren = (node) =>
+  node && node.children ? node.children : node.props && node.props.children;
 
 const renderNodes = (reactNodes) => {
-  if (typeof reactNodes === 'string') {
+  if (typeof reactNodes === "string") {
     return reactNodes;
   }
 
@@ -14,15 +16,18 @@ const renderNodes = (reactNodes) => {
     const child = reactNodes[key];
     const isElement = React.isValidElement(child);
 
-    if (typeof child === 'string') {
+    if (typeof child === "string") {
       return child;
     }
     if (hasChildren(child)) {
       const inner = renderNodes(getChildren(child));
       return React.cloneElement(child, { ...child.props, key: i }, inner);
     }
-    if (typeof child === 'object' && !isElement) {
-      return Object.keys(child).reduce((str, childKey) => `${str}${child[childKey]}`, '');
+    if (typeof child === "object" && !isElement) {
+      return Object.keys(child).reduce(
+        (str, childKey) => `${str}${child[childKey]}`,
+        "",
+      );
     }
 
     return child;
