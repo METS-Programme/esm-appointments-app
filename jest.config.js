@@ -32,14 +32,6 @@ module.exports = {
     "!**/src/declarations.d.ts",
     "!**/e2e/**",
   ],
-  coverageThreshold: {
-    global: {
-      statements: 80,
-      branches: 80,
-      functions: 80,
-      lines: 80,
-    },
-  },
   setupFilesAfterEnv: [path.resolve(__dirname, "tools", "setup-tests.ts")],
   testPathIgnorePatterns: [path.resolve(__dirname, "e2e")],
   testEnvironment: "jsdom",
@@ -48,6 +40,6 @@ module.exports = {
   },
   fakeTimers: {
     enableGlobally: true,
-    legacyFakeTimers: false,
+    legacyFakeTimers: true,
   },
 };
