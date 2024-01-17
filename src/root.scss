@@ -1,41 +1,50 @@
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type';
+@import '~@openmrs/esm-styleguide/src/vars';
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.productiveHeading01 {
+  @include type.type-style('heading-compact-01');
 }
 
-.heading {
+.productiveHeading02 {
+  @include type.type-style('heading-compact-02');
+}
+
+.productiveHeading03 {
   @include type.type-style('heading-03');
 }
 
-.subheading {
-  display: flex;
+.productiveHeading04 {
+  @include type.type-style('heading-04');
+}
+
+.bodyLong01 {
+  @include type.type-style('body-01');
+}
+
+.bodyShort01 {
+  @include type.type-style('body-compact-01');
+}
+
+.bodyShort02 {
+  @include type.type-style('body-compact-02');
+}
+
+.text02 {
+  color: $text-02;
+}
+
+.label01 {
+  @include type.type-style('label-01');
+}
+
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9000;
+  justify-items: center;
   align-items: center;
-  justify-content: center;
-}
-
-.explainer {
-  @include type.type-style('body-long-01');
-  margin: 1rem 0;
-}
-
-.section {
-  margin-top: 2rem;
-  max-width: 40rem;
-
-  p {
-    @include type.type-style('heading-02');
-  }
-}
-
-.list {
-  margin-top: 2rem;
-
-  > * + * {
-    margin-top: spacing.$spacing-04;
-  }
 }
