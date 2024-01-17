@@ -8,7 +8,6 @@ export enum SearchTypes {
   SCHEDULED_VISITS = "scheduled-visits",
 }
 
-
 export interface Appointment {
   appointmentKind: string;
   appointmentNumber: string;
